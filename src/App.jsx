@@ -11,15 +11,9 @@ const Main = styled('div') (({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  height: "100vh",
-  width: "100vw",
+  paddingTop: '5rem',
+  
 }))
-
-const AppContainer = styled(Box)(({theme}) => ({
-  padding: '3rem', 
-  height: '90vh', 
-  overflowY: 'auto'
-}));
 
 function App() {
 
@@ -29,25 +23,29 @@ function App() {
 
   console.log(data)
   
+  const [search, setSearch] = React.useState("");
+
   return (
       <Main>
-    <SearchAppBar/>
-      <AppContainer>
+      <SearchAppBar search={search} setSearch={setSearch}/>
       {isLoading ? (
       <div style={{display: 'flex', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
         <CircularProgress color="primary" size="100px" />
       </div>
       ) : (
-        <Grid container style={{width: '100%', justifyContent: 'center'}}>
-          {data.map((card) => {
+        <Grid container style={{justifyContent: 'center'}}>
+          {data.filter((item) => {
+            return(
+              item.name.toLowerCase().includes(search.toLocaleLowerCase()) || item.level.toLowerCase().includes(search.toLocaleLowerCase())
+            )
+          }).map((card) => {
             return (
               <MediaCard key={crypto.randomUUID()} name={card.name} img={card.img} level={card.level}/>
             )
           })}
         </Grid> 
       )}
-      </AppContainer>
-      <BottomNav/>
+      {/*<BottomNav/>*/}
     </Main>
   );
 }

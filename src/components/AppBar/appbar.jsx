@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
-import {Box, Toolbar, IconButton, Typography, InputBase} from '@mui/material';
+import {Divider, Toolbar, IconButton, Typography, InputBase, Drawer, List, Box} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -47,10 +47,39 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function SearchAppBar() {
+function SearchAppBar(props) {
+
+  const {search, setSearch} = props;
+  const [state, setState] = React.useState(false);
+
+  /**
+     * Updates the value of the search field.
+     */
+  function updateSearchField(value) {
+    setSearch(value);
+}
+
+function toggleDrawer(){
+  setState(!state);
+};
+
+const list = (
+  <Box sx={{width: '300px', backgroundColor: '#343aeb', height: '100%'}}>
+    <List>
+      <div style={{height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <Typography variant='body1' color={'white'}>
+          Welcome to this little Application
+        </Typography>
+      </div>
+    </List>
+    <Divider style={{backgroundColor: 'white'}}/>
+    <List>
+    </List>
+  </Box>
+)
+
   return (
-    <Box sx={{ width: '100%'}}>
-      <AppBar position="static" style={{backgroundColor: '#343aeb'}}>
+      <AppBar position="static" style={{backgroundColor: '#343aeb', position: 'fixed', top: 0}}>
         <Toolbar>
           <IconButton
             size="large"
@@ -58,9 +87,18 @@ function SearchAppBar() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={toggleDrawer}
           >
             <MenuIcon />
           </IconButton>
+          <Drawer
+            anchor={'left'}
+            open={state}
+            onClose={toggleDrawer}
+            style={{width: '300px'}}
+          >
+            {list}
+          </Drawer>
           <Typography
             variant="h6"
             noWrap
@@ -76,11 +114,12 @@ function SearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              value={search}
+              onChange={(event) => { updateSearchField(event.target.value)}}
             />
           </Search>
         </Toolbar>
       </AppBar>
-    </Box>
   );
 }
 export default SearchAppBar;
