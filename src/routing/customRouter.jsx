@@ -2,6 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "../container/Home";
 import Favorites from "../container/Favorites";
+import Profile from "../container/Profile";
 
 function CustomRouter(props){
 
@@ -9,8 +10,9 @@ function CustomRouter(props){
 
   return (
     <Routes>
-      <Route index element={<Home search={search}/>}/>
+      <Route path="/" element={<Home search={search}/>}/>
       <Route path="favorites" element={<Favorites/>}/>
+      <Route path="profile" element={<Profile/>}/>
     </Routes>
   )
 }

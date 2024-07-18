@@ -4,8 +4,10 @@ import AppBar from '@mui/material/AppBar';
 import {Divider, Toolbar, IconButton, Typography, InputBase, Drawer, List, Box, ListItemButton, ListItemIcon, ListItemText, ListItem} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { Loyalty } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+
+import { Home, Loyalty } from '@mui/icons-material';
+import { AccountBox } from '@mui/icons-material';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -62,11 +64,20 @@ function SearchAppBar(props) {
   // Array of Pages
   const pages = [
     {
+      name: "Home",
+      linkTo: "/",
+      icon: <Home/>
+    },
+    {
+      name: "Profile",
+      linkTo: "profile",
+      icon: <AccountBox/>
+    },
+    {
       name: "Favorites",
-      nameSize: "1.5rem", 
       linkTo: "favorites",
-      icon: <Loyalty sx={{color: "white", width: "1.5rem"}}/>
-    }
+      icon: <Loyalty/>
+    },
   ]
 
   /**
@@ -98,9 +109,9 @@ const list = (
               <ListItem key={index} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    {page.icon}
+                    <div style={{color: "white", paddingTop: "0.4rem"}}>{page.icon}</div>
                   </ListItemIcon>
-                  <StyledListItemText primary={page.name} primaryTypographyProps={{fontSize: page.nameSize}}/>
+                  <StyledListItemText primary={page.name} primaryTypographyProps={{fontSize: "1.2rem"}}/>
                 </ListItemButton>
               </ListItem>
             </Link>

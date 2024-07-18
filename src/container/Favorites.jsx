@@ -1,7 +1,9 @@
+import CustomHeader from "../components/Title/header";
+
 function Favorites(){
   return(
     <>
-    <h1 style={{color: '#343aeb'}}>Favorites</h1>
+    <CustomHeader title="Favorites"/>
     </>
   )
 }
