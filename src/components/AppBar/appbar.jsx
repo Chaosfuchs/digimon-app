@@ -1,9 +1,11 @@
 import React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
-import {Divider, Toolbar, IconButton, Typography, InputBase, Drawer, List, Box} from '@mui/material';
+import {Divider, Toolbar, IconButton, Typography, InputBase, Drawer, List, Box, ListItemButton, ListItemIcon, ListItemText, ListItem} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import { Loyalty } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -47,11 +49,25 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const StyledListItemText = styled(ListItemText)(({theme}) => ({
+  color: alpha(theme.palette.common.white, 1.0)
+}))
+
 function SearchAppBar(props) {
 
   // eslint-disable-next-line react/prop-types
   const {search, setSearch} = props;
   const [state, setState] = React.useState(false);
+
+  // Array of Pages
+  const pages = [
+    {
+      name: "Favorites",
+      nameSize: "1.5rem", 
+      linkTo: "favorites",
+      icon: <Loyalty sx={{color: "white", width: "1.5rem"}}/>
+    }
+  ]
 
   /**
      * Updates the value of the search field.
@@ -75,6 +91,22 @@ const list = (
     </List>
     <Divider style={{backgroundColor: 'white'}}/>
     <List>
+      {pages.map((page, index) => {
+        return (
+          <>
+            <Link to={page.linkTo} style={{display: "flex", flexDirection: "row", alignItems: "center", textDecoration: "none"}}>
+              <ListItem key={index} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {page.icon}
+                  </ListItemIcon>
+                  <StyledListItemText primary={page.name} primaryTypographyProps={{fontSize: page.nameSize}}/>
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          </>
+        )
+      })}
     </List>
   </Box>
 )
@@ -100,14 +132,14 @@ const list = (
           >
             {list}
           </Drawer>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            Digimon API
-          </Typography>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            >
+            <Link to="/" style={{textDecoration: "none", color: "white"}}> Digimon API</Link>
+            </Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />

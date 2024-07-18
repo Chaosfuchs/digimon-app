@@ -1,4 +1,3 @@
-import React from "react";
 import { BottomNavigation, Pagination  } from "@mui/material";
 
 function BottomNav(){

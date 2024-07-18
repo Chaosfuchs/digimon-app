@@ -5,12 +5,13 @@ import { Tooltip } from "@mui/material";
 
 function MediaCard(props) {
 
+// eslint-disable-next-line react/prop-types
 const {name, img, level} = props;
 
 const [toggleLike, setToggleLike] = React.useState(false);
 
-  return (
-  <Card sx={{ display: 'flex', margin: '1rem', minWidth: '300px', width: '100vw', maxWidth: '300px', boxShadow: '5px 5px 15px -3px rgba(0,0,0,0.5)' }}>
+  return (  
+  <Card sx={{ display: 'flex', justifyContent: "space-between", margin: '1rem', minWidth: '300px', width: '100vw', maxWidth: '350px', boxShadow: '5px 5px 15px -3px rgba(0,0,0,0.5)' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1 0 auto', textAlign: 'center' }}>
           <Typography component="div" variant="h5">
@@ -33,7 +34,7 @@ const [toggleLike, setToggleLike] = React.useState(false);
       </Box>
       <CardMedia
         component="img"
-        sx={{ width: 150 }}
+        sx={{width: 150}}
         image={img}
         alt={name}
       />
