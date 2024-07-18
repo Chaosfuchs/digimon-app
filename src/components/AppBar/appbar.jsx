@@ -49,6 +49,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function SearchAppBar(props) {
 
+  // eslint-disable-next-line react/prop-types
   const {search, setSearch} = props;
   const [state, setState] = React.useState(false);
 
@@ -61,7 +62,7 @@ function SearchAppBar(props) {
 
 function toggleDrawer(){
   setState(!state);
-};
+}
 
 const list = (
   <Box sx={{width: '300px', backgroundColor: '#343aeb', height: '100%'}}>
@@ -122,4 +123,6 @@ const list = (
       </AppBar>
   );
 }
+
 export default SearchAppBar;
+

@@ -2,12 +2,12 @@ import React from "react";
 import "./App.css";
 import { styled } from '@mui/material/styles';
 import MediaCard from "./components/Card/card";
-import { Box, Grid, CircularProgress } from "@mui/material";
+import { Grid, CircularProgress } from "@mui/material";
 import SearchAppBar from "./components/AppBar/appbar";
 import { useGetAllDigimonQuery } from "./redux-toolkit/api";
-import BottomNav from "./components/BottomNav/bottomNav";
+//import BottomNav from "./components/BottomNav/bottomNav";
 
-const Main = styled('div') (({ theme }) => ({
+const Main = styled('div') (() => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -17,7 +17,7 @@ const Main = styled('div') (({ theme }) => ({
 
 function App() {
 
-  const {data, error, isLoading} = useGetAllDigimonQuery();
+  const {data, /* error, */ isLoading} = useGetAllDigimonQuery();
 
   //const isFakeLoading = true;
 
@@ -34,9 +34,9 @@ function App() {
       </div>
       ) : (
         <Grid container style={{justifyContent: 'center'}}>
-          {data.filter((item) => {
+          {data?.filter((item) => {
             return(
-              item.name.toLowerCase().includes(search.toLocaleLowerCase()) || item.level.toLowerCase().includes(search.toLocaleLowerCase())
+              item.name?.toLowerCase().includes(search?.toLocaleLowerCase()) || item.level?.toLowerCase().includes(search?.toLocaleLowerCase())
             )
           }).map((card) => {
             return (
