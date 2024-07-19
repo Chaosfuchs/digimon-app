@@ -4,13 +4,11 @@ import Home from "../container/Home";
 import Favorites from "../container/Favorites";
 import Profile from "../container/Profile";
 
-function CustomRouter(props){
-
-  const {search} = props;
+function CustomRouter(){
 
   return (
     <Routes>
-      <Route path="/" element={<Home search={search}/>}/>
+      <Route path="/" element={<Home/>}/>
       <Route path="favorites" element={<Favorites/>}/>
       <Route path="profile" element={<Profile/>}/>
     </Routes>

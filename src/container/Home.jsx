@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import MediaCard from "../components/Card/card";
-import { Grid, CircularProgress } from "@mui/material";
+import { Grid, CircularProgress} from "@mui/material";
 import { useGetAllDigimonQuery } from "../redux-toolkit/api";
+import { useContext } from "react";
+import { SearchContext } from "../context/searchContext";
 //import BottomNav from "../components/BottomNav/bottomNav";
-function Home(props){
+function Home(){
 
-  const {search} = props;
+  const {search} = useContext(SearchContext);
   const {data, /* error, */ isLoading} = useGetAllDigimonQuery();
 
 return(

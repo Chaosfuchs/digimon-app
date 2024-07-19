@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import { styled } from '@mui/material/styles';
 import SearchAppBar from "./components/AppBar/appbar";
@@ -14,12 +13,10 @@ const Main = styled('div') (() => ({
 
 function App() {
 
-  const [search, setSearch] = React.useState("");
-
   return (
       <Main>
-      <SearchAppBar search={search} setSearch={setSearch}/>
-      <CustomRouter search={search}/>
+      <SearchAppBar/>
+      <CustomRouter/>
     </Main>
   );
 }

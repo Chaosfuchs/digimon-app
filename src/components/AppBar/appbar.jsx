@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import {Divider, Toolbar, IconButton, Typography, InputBase, Drawer, List, Box, ListItemButton, ListItemIcon, ListItemText, ListItem} from '@mui/material';
@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 import { Home, Loyalty } from '@mui/icons-material';
 import { AccountBox } from '@mui/icons-material';
+import { SearchContext } from '../../context/searchContext';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -55,11 +56,13 @@ const StyledListItemText = styled(ListItemText)(({theme}) => ({
   color: alpha(theme.palette.common.white, 1.0)
 }))
 
-function SearchAppBar(props) {
+function SearchAppBar() {
 
   // eslint-disable-next-line react/prop-types
-  const {search, setSearch} = props;
+  //const {search, setSearch} = props;
   const [state, setState] = React.useState(false);
+
+  const {search, updateSearch} = useContext(SearchContext);
 
   // Array of Pages
   const pages = [
@@ -83,8 +86,8 @@ function SearchAppBar(props) {
   /**
      * Updates the value of the search field.
      */
-  function updateSearchField(value) {
-    setSearch(value);
+  function updateSearchField(event) {
+    updateSearch(event.target.value)
 }
 
 function toggleDrawer(){
@@ -105,8 +108,8 @@ const list = (
       {pages.map((page, index) => {
         return (
           <>
-            <Link to={page.linkTo} style={{display: "flex", flexDirection: "row", alignItems: "center", textDecoration: "none"}}>
-              <ListItem key={index} disablePadding>
+            <Link to={page.linkTo} key={index} style={{display: "flex", flexDirection: "row", alignItems: "center", textDecoration: "none"}}>
+              <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
                     <div style={{color: "white", paddingTop: "0.4rem"}}>{page.icon}</div>
@@ -159,7 +162,7 @@ const list = (
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
               value={search}
-              onChange={(event) => { updateSearchField(event.target.value)}}
+              onChange={(event) => updateSearchField(event)}
             />
           </Search>
         </Toolbar>
